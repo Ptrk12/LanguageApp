@@ -13,7 +13,7 @@ const Lessons = ({ navigation }) => {
   }
 
   return (
-    <View style={tw`mt--50 flex-1 items-center justify-center`}>
+    <View style={tw`mt--30 flex-1 items-center justify-center`}>
       {reactQuestionsLessons.map((lesson, index) => (
         <Pressable 
           key={index} 

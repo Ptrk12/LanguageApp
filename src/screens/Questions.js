@@ -1,7 +1,8 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { reactQuestionsLessons } from "../config/question";
 import * as Progress from "react-native-progress";
+import tw from "twrnc";
 
 const Questions = ({ navigation, route }) => {
   const { lessonNumber } = route.params;
@@ -52,6 +53,7 @@ const Questions = ({ navigation, route }) => {
 
   return (
     <View style={{ marginTop: 24, padding: 16 }}>
+      <ScrollView>
       <View style={{ flexDirection: 'row', flex: 1 }}>
         <Progress.Bar
           progress={progress}
@@ -82,6 +84,7 @@ const Questions = ({ navigation, route }) => {
           {currentQuestionIndex === lesson.length - 1 ? "Finish" : "Next"}
         </Text>
       </Pressable>
+      </ScrollView>
     </View>
   );
 };

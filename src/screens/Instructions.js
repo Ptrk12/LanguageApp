@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 import tw from "twrnc";
 
@@ -7,6 +7,7 @@ const Instructions = ({ navigation, route }) => {
 
   return (
     <View style={tw`flex-1 items-center`}>
+      <ScrollView contentContainerStyle={tw`items-center pb-10`}>
       <Image
         source={require("../../assets/images/splash.jpg")}
         style={tw.style(tw`h-3/6 `, { aspectRatio: 1 })}
@@ -29,6 +30,7 @@ const Instructions = ({ navigation, route }) => {
       >
         <Text style={tw`text-white text-lg`}>Start</Text>
       </Pressable>
+      </ScrollView>
     </View>
   );
 };
