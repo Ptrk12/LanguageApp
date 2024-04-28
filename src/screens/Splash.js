@@ -1,8 +1,13 @@
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Repository } from "../repository/Repository";
 import tw from "twrnc";
 
 const Splash = ({ navigation }) => {
+  
+  Repository.InitData();
+
+
   return (
     <View style={tw`flex-1 items-center`}>
       <ScrollView contentContainerStyle={tw`items-center pb-10`}>

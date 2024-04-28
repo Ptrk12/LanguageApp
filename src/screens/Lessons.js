@@ -5,7 +5,7 @@ import {reactQuestionsLessons} from "../config/question"
 
 const Lessons = ({ navigation }) => {
   const handlePressLesson = (lessonIndex) => {
-    navigation.navigate('Instructions', { lessonNumber: lessonIndex });
+    navigation.navigate('Instructions', { lessonNumber: lessonIndex+1 });
   };
 
   const handlePressSummary=() =>{
