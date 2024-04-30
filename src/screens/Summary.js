@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Summary = () => {
@@ -23,16 +23,62 @@ const Summary = () => {
     importData();
   }, []);
 
+  const getScoreColor = (score) => {
+    if (score === 0 || score === 10) return '#ff6347'; 
+    if (score === 20) return '#ffd700'; 
+    if (score === 30 || score === 40) return '#32cd32'; 
+    return '#000'; 
+  };
+
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 24, marginBottom: 20 }}>Summary</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Podsumowanie wyników lekcji</Text>
       {lessons.map((lesson, index) => (
-        <View key={index} style={{ marginBottom: 10 }}>
-          <Text style={{ fontSize: 18 }}>Lesson {lesson.lessonNumber + 1}: {lesson.score} points</Text>
+        <View key={index} style={styles.lessonContainer}>
+          <Text style={[styles.lessonText, {color: getScoreColor(lesson.score)}]}>
+            Lekcja nr {lesson.lessonNumber}: {lesson.score} punktów
+          </Text>
         </View>
       ))}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    color: '#333',
+  },
+  lessonContainer: {
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  lessonText: {
+    fontSize: 18,
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#007bff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+});
 
 export default Summary;

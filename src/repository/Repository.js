@@ -3,7 +3,7 @@ import {reactQuestionsLessons} from "../config/question"
 
 export class Repository {
     static async getLessonById(lessonId) {
-        const storageKey = 'reactQuestionsLessons';  // The key where all lessons are stored
+        const storageKey = 'reactQuestionsLessons';  
         if (lessonId === undefined) {
             console.log("Lesson ID is undefined.");
             return null;
@@ -22,7 +22,6 @@ export class Repository {
                 return null;
             }
 
-            // Assuming that lessonId should be compared as an integer
             const lesson = lessons.find(item => item.id === parseInt(lessonId, 10));
             if (!lesson) {
                 console.log("No lesson found for ID:", lessonId);

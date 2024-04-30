@@ -68,7 +68,7 @@ const Questions = ({ navigation, route }) => {
                         borderWidth={2}
                         borderColor="#ccc"
                         useNativeDriver={true}
-                        style={{ flex: 1, marginHorizontal: 10 }} // Ensure it takes the full available width
+                        style={{ flex: 1, marginHorizontal: 10 }} 
                     />
                 </View>
                 <Text style={{ fontSize: 24, marginBottom: 16 }}>
