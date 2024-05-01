@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Pressable, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Pressable, Text, View, ScrollView, Animated } from 'react-native';
 import { Repository } from '../repository/Repository';
 import * as Progress from 'react-native-progress';
-import tw from 'twrnc';
 
 const Questions = ({ navigation, route }) => {
     const { lessonNumber } = route.params;
@@ -11,6 +10,7 @@ const Questions = ({ navigation, route }) => {
     const [score, setScore] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
+    const [buttonScale, setButtonScale] = useState(new Animated.Value(1)); // Using a single scale for simplification
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -22,6 +22,30 @@ const Questions = ({ navigation, route }) => {
 
     const progress = (currentQuestionIndex + 1) / lesson.length;
 
+    const handleOptionPress = (pressedOption) => {
+        const isAnswerCorrect = lesson[currentQuestionIndex].correctAnswer === pressedOption;
+        setIsCorrect(isAnswerCorrect);
+        setSelectedOption(pressedOption);
+
+        if (isAnswerCorrect) {
+            setScore(prevScore => prevScore + 10);
+        }
+
+        // Trigger animation on selection
+        Animated.sequence([
+            Animated.timing(buttonScale, {
+                toValue: 0.95,
+                duration: 100,
+                useNativeDriver: true
+            }),
+            Animated.timing(buttonScale, {
+                toValue: 1,
+                duration: 100,
+                useNativeDriver: true
+            })
+        ]).start();
+    };
+
     const handleNext = () => {
         if (currentQuestionIndex === lesson.length - 1) {
             navigation.navigate("Score", { score: score, lessonNumber: lessonNumber });
@@ -32,16 +56,6 @@ const Questions = ({ navigation, route }) => {
         }
     };
 
-    const handleOptionPress = (pressedOption) => {
-        const isAnswerCorrect = lesson[currentQuestionIndex].correctAnswer === pressedOption;
-        setIsCorrect(isAnswerCorrect);
-        setSelectedOption(pressedOption);
-
-        if (isAnswerCorrect) {
-            setScore((prevScore) => prevScore + 10);
-        }
-    };
-
     const getButtonStyle = (option) => ({
         borderWidth: 2,
         padding: 16,
@@ -49,7 +63,8 @@ const Questions = ({ navigation, route }) => {
         marginBottom: 8,
         borderRadius: 8,
         borderColor: 'purple',
-        backgroundColor: selectedOption === option ? (isCorrect ? 'green' : 'red') : 'transparent'
+        backgroundColor: selectedOption === option ? (isCorrect ? 'green' : 'red') : 'transparent',
+        transform: [{ scale: selectedOption === option ? buttonScale : 1 }]
     });
 
     if (lesson.length === 0) {
@@ -74,14 +89,15 @@ const Questions = ({ navigation, route }) => {
                 <Text style={{ fontSize: 24, marginBottom: 16 }}>
                     {lesson[currentQuestionIndex].question}
                 </Text>
-                {lesson[currentQuestionIndex].options.map((option, index) => (
+                {lesson[currentQuestionIndex].options.map((option) => (
                     <Pressable
                         key={option}
-                        style={getButtonStyle(option)}
                         onPress={() => handleOptionPress(option)}
                         disabled={selectedOption !== null}
                     >
-                        <Text style={{ fontSize: 18 }}>{option}</Text>
+                        <Animated.View style={getButtonStyle(option)}>
+                            <Text style={{ fontSize: 18 }}>{option}</Text>
+                        </Animated.View>
                     </Pressable>
                 ))}
                 <Pressable

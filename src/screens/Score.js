@@ -8,7 +8,6 @@ const Score = ({ navigation }) => {
   const route = useRoute();
   const { lessonNumber, score } = route.params; 
 
-  // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0)).current;
 
