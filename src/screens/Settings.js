@@ -1,15 +1,15 @@
+import { useSettings } from '../SettingsContext';
 import * as React from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
-import Slider from '@react-native-community/slider';
-import { useSettings } from '../SettingsContext';
 import { Picker } from '@react-native-picker/picker';
 
 export default function Settings({ navigation }) {
-    
     const [selectedOption, setSelectedOption] = React.useState("A1");
     const [isDarkMode, setIsDarkMode] = React.useState(false);
-    const { isNotificationsEnabled, setIsNotificationsEnabled } = useSettings();
-    
+
+    // Use settings from context
+    const settings = useSettings();
+    const { language, setLanguage, isNotificationsEnabled, setIsNotificationsEnabled } = settings;
 
     return (
         <View style={styles.container}>
@@ -19,9 +19,18 @@ export default function Settings({ navigation }) {
             <Text style={styles.subHeader}>Choose Option:</Text>
             <Picker
                 selectedValue={selectedOption}
-                onValueChange={(itemValue, itemIndex) => setSelectedOption(itemValue)}
+                onValueChange={(itemValue) => setSelectedOption(itemValue)}
                 style={styles.picker}>
                 {['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].map(option => (
+                    <Picker.Item key={option} label={option} value={option} />
+                ))}
+            </Picker>
+            <Text style={styles.subHeader}>Choose language:</Text>
+            <Picker
+                selectedValue={language}
+                onValueChange={itemValue => setLanguage(itemValue)}
+                style={styles.picker}>
+                {['English', 'German'].map(option => (
                     <Picker.Item key={option} label={option} value={option} />
                 ))}
             </Picker>

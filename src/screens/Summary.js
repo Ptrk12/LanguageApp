@@ -36,7 +36,7 @@ const Summary = () => {
       {lessons.map((lesson, index) => (
         <View key={index} style={styles.lessonContainer}>
           <Text style={[styles.lessonText, {color: getScoreColor(lesson.score)}]}>
-            Lekcja nr {lesson.lessonNumber}: {lesson.score} punktów
+            Lekcja nr {lesson.lessonNumber+1}: {lesson.score} punktów
           </Text>
         </View>
       ))}

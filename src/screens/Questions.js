@@ -10,8 +10,8 @@ const Questions = ({ navigation, route }) => {
     const [score, setScore] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
-    const [buttonScale, setButtonScale] = useState(new Animated.Value(1)); // Using a single scale for simplification
-
+    const [buttonScale, setButtonScale] = useState(new Animated.Value(1)); 
+    console.log(lessonNumber)
     useEffect(() => {
         const fetchItems = async () => {
             const allItems = await Repository.getLessonById(lessonNumber.toString());
@@ -19,7 +19,7 @@ const Questions = ({ navigation, route }) => {
         };
         fetchItems();
     }, [lessonNumber]);
-
+    
     const progress = (currentQuestionIndex + 1) / lesson.length;
 
     const handleOptionPress = (pressedOption) => {

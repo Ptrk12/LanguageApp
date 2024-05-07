@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "extra": {
+      "projectId": "your-expo-project-id"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],

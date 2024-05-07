@@ -27,7 +27,6 @@ export default function App() {
     }),
   });
   
-  // Example of handling notification responses (when a user taps a notification)
   Notifications.addNotificationResponseReceivedListener(response => {
     console.log(response);
   });

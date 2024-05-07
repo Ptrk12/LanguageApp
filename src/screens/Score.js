@@ -4,18 +4,18 @@ import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from 'expo-notifications';
 import tw from "twrnc";
-import { useSettings } from '../SettingsContext';  // Path to your SettingsContext
+import { useSettings } from '../SettingsContext';  
 
 
 const Score = ({ navigation }) => {
   const route = useRoute();
   const { lessonNumber, score } = route.params;
-  const { isNotificationsEnabled } = useSettings();  // Using context to get the notification setting
+  const { isNotificationsEnabled } = useSettings();  
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0)).current;
 
+console.log(isNotificationsEnabled)
   useEffect(() => {
-    // Run animation sequence
     Animated.sequence([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -29,7 +29,7 @@ const Score = ({ navigation }) => {
       }),
     ]).start();
 
-    // Conditionally trigger a notification if enabled
+    console.log(isNotificationsEnabled)
     if (isNotificationsEnabled) {
       showNotification();
     }
@@ -41,7 +41,7 @@ const Score = ({ navigation }) => {
         title: "Congratulations!",
         body: `You scored ${score} points!`,
       },
-      trigger: null, // This triggers the notification immediately
+      trigger: null, 
     });
   };
 
