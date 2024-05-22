@@ -14,7 +14,7 @@ const Lessons = ({ navigation }) => {
   async function getLessons() {
     try {
       const lessons = await Repository.getAllItems();
-      const languageLessons = lessons.flat().filter(item => item.language === language);
+      const languageLessons = lessons.flat().filter(item => item.language === language || item.languageLesson === language);
       return languageLessons;
     } catch (error) {
     }

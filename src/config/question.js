@@ -4,6 +4,11 @@ export const reactQuestionsLessons = [
     id: 1,
     questions: [
       {
+        question: "angielski lekcja test",
+        options: ["OK"],
+        correctAnswer: "OK",
+      },
+      {
         question: "2+2",
         options: ["4", "3", "2", "10"],
         correctAnswer: "4",
@@ -30,6 +35,11 @@ export const reactQuestionsLessons = [
     id: 2,
     questions: [
       {
+        question: "angielski lekcja test",
+        options: ["OK"],
+        correctAnswer: "OK",
+      },
+      {
         question: "69-66",
         options: ["4", "3", "2", "10"],
         correctAnswer: "3", 
@@ -55,6 +65,11 @@ export const reactQuestionsLessons = [
     language:"German",
     id: 3,
     questions: [
+      {
+        question: "German lekcja test",
+        options: ["OK"],
+        correctAnswer: "OK",
+      },
       {
         question: "German",
         options: ["4", "3", "2", "10"],

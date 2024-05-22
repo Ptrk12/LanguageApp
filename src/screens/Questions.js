@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Pressable, Text, View, ScrollView, Animated } from 'react-native';
 import { Repository } from '../repository/Repository';
 import * as Progress from 'react-native-progress';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Questions = ({ navigation, route }) => {
     const { lessonNumber } = route.params;
@@ -19,7 +20,7 @@ const Questions = ({ navigation, route }) => {
         };
         fetchItems();
     }, [lessonNumber]);
-    
+    console.log(lesson)
     const progress = (currentQuestionIndex + 1) / lesson.length;
 
     const handleOptionPress = (pressedOption) => {
@@ -31,7 +32,6 @@ const Questions = ({ navigation, route }) => {
             setScore(prevScore => prevScore + 10);
         }
 
-        // Trigger animation on selection
         Animated.sequence([
             Animated.timing(buttonScale, {
                 toValue: 0.95,
@@ -45,7 +45,6 @@ const Questions = ({ navigation, route }) => {
             })
         ]).start();
     };
-
     const handleNext = () => {
         if (currentQuestionIndex === lesson.length - 1) {
             navigation.navigate("Score", { score: score, lessonNumber: lessonNumber });
