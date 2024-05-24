@@ -11,6 +11,7 @@ import Score from "../screens/Score";
 import Lessons from "../screens/Lessons";
 import Splash from "../screens/Splash";
 import Summary from "../screens/Summary";
+import Ranking from "../screens/Ranking";
 import Settings from "../screens/Settings";
 
 const HomeStack = createNativeStackNavigator();
@@ -23,6 +24,7 @@ function HomeStackScreen() {
       <HomeStack.Screen name="Score" component={Score} />
       <HomeStack.Screen name="Lesson" component={Lessons} />
       <HomeStack.Screen name="Summary" component={Summary} />
+      <HomeStack.Screen name="Ranking" component={Ranking} />
     </HomeStack.Navigator>
   );
 }
@@ -32,6 +34,15 @@ function SettingsStackScreen() {
   return (
     <SettingsStack.Navigator screenOptions={{ headerShown: false }}>
       <SettingsStack.Screen name="Settings" component={Settings} />
+      <SettingsStack.Screen name="Ranking" component={Ranking} />
+    </SettingsStack.Navigator>
+  );
+}
+
+function RankingStackScreen() {
+  return (
+    <SettingsStack.Navigator screenOptions={{ headerShown: false }}>
+      <SettingsStack.Screen name="Ranking" component={Ranking} />
     </SettingsStack.Navigator>
   );
 }
@@ -50,6 +61,8 @@ function AppNavigator() {
               iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === "Settings") {
               iconName = focused ? 'settings' : 'settings-outline';
+            }else if(route.name === "Ranking"){
+              iconName = focused ? 'accessibility' : 'accessibility-outline'
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -57,6 +70,7 @@ function AppNavigator() {
       >
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen name="Ranking" component={RankingStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

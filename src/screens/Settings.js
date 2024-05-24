@@ -7,7 +7,6 @@ export default function Settings({ navigation }) {
     const [selectedOption, setSelectedOption] = React.useState("A1");
     const [isDarkMode, setIsDarkMode] = React.useState(false);
 
-    // Use settings from context
     const settings = useSettings();
     const { language, setLanguage, isNotificationsEnabled, setIsNotificationsEnabled } = settings;
 
